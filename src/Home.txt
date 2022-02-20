@@ -1,0 +1,42 @@
+import React, { Component } from 'react';
+import './App.css';
+
+class Home extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+          pulseData: [],
+          LedValue: [],
+        }
+      }
+      componentDidMount() {
+          const url = 'https://blynk.cloud/external/api/update?token=N_YA9SXZzdLJGMMfz4rB8Oz5i3al4HE6&a0&v0';
+    
+          fetch(url)
+            .then(res => res.json())
+            .then(res => this.setState({pulseData: res.data}))
+      }
+      render() {
+        const {pulseData} = this.state;
+        return (
+          <div className='container'>
+            <h1>Display</h1>
+            <h3>Pulse Data Center</h3>
+             {pulseData.map((pulseData) => (
+                <li key={pulseData}></li>
+             ))}
+          <div className='container2'>
+              <h3>Led Control Center</h3>
+              <button className='buttonGreen' onClick={"CLICKED"}>
+                ON
+              </button>
+              <button className='buttonRed' onClick={"CLICKED"}>
+                OFF
+              </button>
+              </div>      
+          </div>
+        )
+      }
+
+}
+export default Home;
